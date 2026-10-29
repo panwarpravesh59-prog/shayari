@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sirf Tumhare Liye ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Kalam:wght@300;400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg1: #1a0b2e;
+    --bg2: #4a1942;
+    --bg3: #8e2a5b;
+    --pink: #ff6b9d;
+    --gold: #ffd6a5;
+    --glass: rgba(255, 255, 255, 0.08);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    background: linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+    background-size: 300% 300%;
+    animation: gradientMove 14s ease infinite;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  canvas#sky { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+  .heart {
+    position: fixed; bottom: -40px; z-index: 1; pointer-events: none;
+    animation: floatUp linear forwards; opacity: 0.8;
+  }
+  @keyframes floatUp {
+    to { transform: translateY(-115vh) rotate(25deg); opacity: 0; }
+  }
+
+  .screen {
+    position: relative; z-index: 2;
+    width: min(92vw, 560px);
+    text-align: center;
+    padding: 36px 26px;
+    border-radius: 28px;
+    background: var(--glass);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45), inset 0 0 30px rgba(255, 107, 157, 0.08);
+    animation: popIn 0.9s ease both;
+  }
+  .hidden { display: none; }
+  @keyframes popIn {
+    from { opacity: 0; transform: translateY(30px) scale(0.95); }
+    to { opacity: 1; transform: none; }
+  }
+
+  h1.script {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2.6rem, 9vw, 3.8rem);
+    font-weight: 400;
+    background: linear-gradient(90deg, var(--pink), var(--gold));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+  }
+  p.sub { font-weight: 300; opacity: 0.85; margin-bottom: 22px; line-height: 1.6; }
+
+  input[type="text"] {
+    width: 100%; padding: 14px 18px; border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.1); color: #fff;
+    font-size: 1rem; text-align: center; outline: none;
+    margin-bottom: 18px; font-family: inherit;
+  }
+  input::placeholder { color: rgba(255,255,255,0.55); }
+  input:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(255,107,157,0.25); }
+
+  button {
+    font-family: inherit; cursor: pointer; border: none; color: #fff;
+    padding: 12px 28px; border-radius: 50px; font-size: 1rem; font-weight: 600;
+    background: linear-gradient(135deg, #ff6b9d, #c44569);
+    box-shadow: 0 8px 22px rgba(255, 107, 157, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  button:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 12px 28px rgba(255,107,157,0.55); }
+  button:active { transform: scale(0.97); }
+  button.ghost {
+    background: rgba(255,255,255,0.12); box-shadow: none;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+
+  .to { font-family: 'Great Vibes', cursive; font-size: 1.9rem; color: var(--gold); margin-bottom: 6px; }
+  .counter { font-size: 0.8rem; letter-spacing: 3px; opacity: 0.6; margin-bottom: 16px; }
+  .quote-mark { font-size: 3rem; line-height: 0.6; color: var(--pink); opacity: 0.7; }
+  #shayari {
+    font-family: 'Kalam', cursive;
+    font-size: clamp(1.3rem, 5vw, 1.8rem);
+    line-height: 1.9;
+    min-height: 150px;
+    margin: 14px 0 22px;
+    white-space: pre-line;
+    text-shadow: 0 2px 14px rgba(255, 107, 157, 0.35);
+  }
+  #shayari::after {
+    content: '|'; color: var(--pink); margin-left: 2px;
+    animation: blink 0.8s infinite;
+  }
+  .done #shayari::after { display: none; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .controls { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  .dots { display: flex; gap: 8px; justify-content: center; margin-top: 22px; }
+  .dots span {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255,255,255,0.3); transition: 0.3s;
+  }
+  .dots span.active { background: var(--pink); transform: scale(1.5); box-shadow: 0 0 10px var(--pink); }
+
+  .big-heart { font-size: 3.4rem; animation: beat 1.2s infinite; display: inline-block; margin-bottom: 8px; }
+  @keyframes beat {
+    0%, 100% { transform: scale(1); } 15% { transform: scale(1.25); } 30% { transform: scale(1); } 45% { transform: scale(1.18); }
+  }
+  .final-text { font-family: 'Kalam', cursive; font-size: 1.35rem; line-height: 1.9; margin: 14px 0 22px; }
+</style>
+</head>
+<body>
+
+<canvas id="sky"></canvas>
+
+<!-- Screen 1: Welcome -->
+<div class="screen" id="welcome">
+  <div class="big-heart">💖</div>
+  <h1 class="script">Sirf Tumhare Liye</h1>
+  <p class="sub">Kuch lafz hain jo dil se nikle hain...<br>Apna naam likho aur shuru karo ✨</p>
+  <input type="text" id="nameInput" placeholder="Tumhara naam..." maxlength="25">
+  <button id="startBtn">Shayari Kholo 💌</button>
+</div>
+
+<!-- Screen 2: Shayari -->
+<div class="screen hidden" id="reader">
+  <div class="to" id="toName"></div>
+  <div class="counter" id="counter"></div>
+  <div class="quote-mark">❝</div>
+  <div id="shayari"></div>
+  <div class="controls">
+    <button class="ghost" id="prevBtn">← Pehle wali</button>
+    <button id="nextBtn">Agli Shayari →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<!-- Screen 3: Final -->
+<div class="screen hidden" id="finale">
+  <div class="big-heart">❤️</div>
+  <h1 class="script" id="finalName"></h1>
+  <p class="final-text">
+    Tum meri zindagi ki sabse khoobsurat baat ho.<br>
+    Har din tumse thoda aur pyaar hota hai. 🌹
+  </p>
+  <div class="controls">
+    <button class="ghost" id="replayBtn">Phir se padho 🔁</button>
+    <button id="loveBtn">Dil se I Love You 💘</button>
+  </div>
+</div>
+
+<script>
+  // ---------- Shayari collection (original lines) ----------
+  const shayaris = [
+    "तेरी मुस्कान में मेरा जहान बसता है,\nतू पास हो तो हर लम्हा हसीन लगता है।",
+    "चाँद को देखूँ तो तेरा ख़्याल आता है,\nदिल हर बार तुझी पर ठहर जाता है।",
+    "तू मेरी दुआओं का सबसे प्यारा असर है,\nतेरे बिना हर मंज़िल अधूरी सी डगर है।",
+    "लफ़्ज़ कम पड़ जाते हैं तुझे बयाँ करने को,\nबस इतना जान ले, तू ही मेरी हर कहानी है।",
+    "सुबह की पहली चाय हो या रात की आख़िरी बात,\nहर जगह बस तू ही तू है, मेरे साथ।",
+    "ज़िंदगी भर का वादा नहीं, हर दिन का इरादा है,\nतुझे कल से थोड़ा और ज़्यादा चाहने का इरादा है।"
+  ];
+
+  // ---------- Elements ----------
+  const $ = id => document.getElementById(id);
+  const welcome = $('welcome'), reader = $('reader'), finale = $('finale');
+  const shayariEl = $('shayari'), dotsEl = $('dots');
+  let index = 0, typer = null, userName = '';
+
+  // dots
+  shayaris.forEach(() => dotsEl.appendChild(document.createElement('span')));
+
+  function show(screen) {
+    [welcome, reader, finale].forEach(s => s.classList.add('hidden'));
+    screen.classList.remove('hidden');
+    screen.style.animation = 'none'; screen.offsetHeight; screen.style.animation = '';
+  }
+
+  function typeText(text) {
+    clearInterval(typer);
+    shayariEl.textContent = '';
+    reader.classList.remove('done');
+    let i = 0;
+    typer = setInterval(() => {
+      shayariEl.textContent += text[i++];
+      if (i >= text.length) { clearInterval(typer); reader.classList.add('done'); }
+    }, 55);
+  }
+
+  function render() {
+    $('counter').textContent = `${index + 1} / ${shayaris.length}`;
+    [...dotsEl.children].forEach((d, i) => d.classList.toggle('active', i === index));
+    $('prevBtn').style.visibility = index === 0 ? 'hidden' : 'visible';
+    $('nextBtn').textContent = index === shayaris.length - 1 ? 'Ek Aakhri Baat 💫' : 'Agli Shayari →';
+    typeText(shayaris[index]);
+    burstHearts(6);
+  }
+
+  // ---------- Events ----------
+  function start() {
+    userName = $('nameInput').value.trim() || 'Meri Jaan';
+    $('toName').textContent = `${userName} ke naam 💌`;
+    $('finalName').textContent = userName;
+    index = 0; show(reader); render();
+  }
+  $('startBtn').onclick = start;
+  $('nameInput').addEventListener('keydown', e => { if (e.key === 'Enter') start(); });
+
+  $('nextBtn').onclick = () => {
+    if (index < shayaris.length - 1) { index++; render(); }
+    else { clearInterval(typer); show(finale); burstHearts(30); }
+  };
+  $('prevBtn').onclick = () => { if (index > 0) { index--; render(); } };
+  $('replayBtn').onclick = () => { index = 0; show(reader); render(); };
+  $('loveBtn').onclick = () => {
+    burstHearts(60);
+    $('loveBtn').textContent = 'Love you too, hamesha! 🥰';
+  };
+
+  // ---------- Floating hearts ----------
+  const emojis = ['❤️', '💖', '💗', '💕', '🌹', '✨', '💘'];
+  function spawnHeart() {
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    h.style.left = Math.random() * 100 + 'vw';
+    h.style.fontSize = (14 + Math.random() * 26) + 'px';
+    h.style.animationDuration = (6 + Math.random() * 6) + 's';
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 12500);
+  }
+  function burstHearts(n) { for (let i = 0; i < n; i++) setTimeout(spawnHeart, i * 70); }
+  setInterval(spawnHeart, 1200);
+
+  // ---------- Twinkling stars ----------
+  const canvas = $('sky'), ctx = canvas.getContext('2d');
+  let stars = [];
+  function resize() {
+    canvas.width = innerWidth; canvas.height = innerHeight;
+    stars = Array.from({ length: 90 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.6 + 0.3,
+      p: Math.random() * Math.PI * 2,
+      s: 0.01 + Math.random() * 0.03
+    }));
+  }
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(st => {
+      st.p += st.s;
+      ctx.globalAlpha = 0.3 + Math.abs(Math.sin(st.p)) * 0.7;
+      ctx.fillStyle = '#fff';
+      ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2); ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  addEventListener('resize', resize);
+  resize(); draw();
+</script>
+</body>
+</html>
